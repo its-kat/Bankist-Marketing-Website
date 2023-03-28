@@ -120,5 +120,40 @@ logo.classList.toggle('c');
 logo.classList.contains('c'); // not includes
 
 // DON'T USE - this will override all the existing classes and also it allows us to only put one class on any element, all right, so again, only one class and it will override whatever is already there.
+// logo.className = 'jonas';
 
-logo.className = 'jonas';
+////////////// Smooth Scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  //read the height and the width of this view port.
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling - old school way
+
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  //works only in modern browsers
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
