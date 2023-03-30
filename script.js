@@ -1,5 +1,7 @@
 'use strict';
 
+// const { random } = require('animejs');
+
 ///////////////////////////////////////
 // Modal window
 
@@ -141,7 +143,7 @@ btnScrollTo.addEventListener('click', function (e) {
     document.documentElement.clientWidth
   );
 
-  // Scrolling - old school way
+  // Scrolling - old school way notes
 
   // window.scrollTo(
   //   s1coords.left + window.pageXOffset,
@@ -158,19 +160,52 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-////////////// Events and Event handlers
+////////////// Events and Event handlers notes
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-const alertH1 = function (e) {
-  alert('addEventListener: Great! You are reading the heading :D');
-};
+// const alertH1 = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :D');
+// };
 
-h1.addEventListener('mouseenter', alertH1);
+// h1.addEventListener('mouseenter', alertH1);
 
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
 // on-event property - old school way
 // h1.onmouseenter = function (e) {
 //   alert('onmouseenter: Great! You are reading the heading :D');
 // };
+
+// rbg(255, 255, 255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+console.log(randomColor(0, 255));
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+
+  //where the event originated. Where the event first happened.
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+
+  // Stop propagation
+  e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target), e.currentTarget;
+});
+
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('Nav', e.target, e.currentTarget);
+  },
+  false
+);
